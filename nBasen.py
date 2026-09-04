@@ -6,12 +6,6 @@ from termcolor import colored
 listofbasevalues = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
 listofbasevaluesint = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"]
 
-class ParserItemNotInListException(Exception):
-    def __init__(self,m):
-        super()
-        self.m = m
-
-
 def invertlist(listinput: list):
     # The output of the program is added to this
     output = []
@@ -34,7 +28,7 @@ def convert_basentobaseten(basen1: int, inputbase_n):
         if (inputbase_n1_list_inv[i] in listofbasevalues):
             out_baseten_int += int(listofbasevalues.index(inputbase_n1_list_inv[i]))* (int(basen1)**i)
         else: 
-            raise ParserItemNotInListException("Value Not in Accepted List of Base Values")
+            raise Exception("ParserItemNotInListException: Value Not in Accepted List of Base Values")
 
     return out_baseten_int
 
