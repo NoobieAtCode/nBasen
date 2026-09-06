@@ -11,6 +11,8 @@ listofbasevaluesint = [0,1,2,3,4,5,6,7,8,
 maxcharlen: int = 16
 
 #Parser Code
+
+##Misc. Functions
 def listtostr (inlist):
     return "".join(inlist)
 
@@ -22,8 +24,12 @@ def invertlist(listinput: list):
 
     return output
 
-# Convert both inputs to Array[string]
-# Invert both lists 
+def baseintoverflowdect (basen1, basen2, inputbase_n):
+    currentb1val = convert_basentobaseten(int(basen1), inputbase_n)
+    maxb2 = convert_basentobaseten(int(basen2), listtostr(maxcharlen*conv_10pl_equiv([basen2-1], "to")))
+    return True if (currentb1val>maxb2) else False
+
+##Conversion Functions
 def convert_basentobaseten(basen: int, inputbase_n):
     inputbase_n1: list = invertlist(list(str(str.upper(inputbase_n))))
     out_baseten_int = 0
@@ -34,11 +40,6 @@ def convert_basentobaseten(basen: int, inputbase_n):
             return None
 
     return out_baseten_int
-
-def baseintoverflowdect (basen1, basen2, inputbase_n):
-    currentb1val = convert_basentobaseten(int(basen1), inputbase_n)
-    maxb2 = convert_basentobaseten(int(basen2), listtostr(maxcharlen*conv_10pl_equiv([basen2-1], "to")))
-    return True if (currentb1val>maxb2) else False
 
 
 def conv_10pl_equiv(inputd, mode):
@@ -55,7 +56,7 @@ def conv_10pl_equiv(inputd, mode):
 
     return rlist
 
-#Main convert function
+##Main convert function
 def convert_bases(basen1: int | str, basen2: int | str, inputbase_n):
     basen1 = int(basen1)
     basen2 = int(basen2)
@@ -82,7 +83,7 @@ def convert_bases(basen1: int | str, basen2: int | str, inputbase_n):
 #GUI Code
 root = tk.Tk()
 
-#Frame
+##Main Frame
 frm = ttk.Frame(root, padding=75, width=75, height=75)
 frm.grid()
 
@@ -96,7 +97,7 @@ sbbtnstyle = ttk.Style().configure("SbButton.TButton", foreground="green", backg
 swbtnstyle = ttk.Style().configure("SwButton.TButton", foreground="blue", background="blue")
 ebtnstyle = ttk.Style().configure("EButton.TButton", foreground="ivory4", background="ivory4")
 
-#Functions
+##Functions
 def parseinput (base1, base2, inputmain):
     if type(convert_basentobaseten(int(base1), inputmain)) != int:
         throwerr("Error Code 1")
@@ -153,7 +154,7 @@ def errorcodesmenu ():
     rooterr.wm_iconbitmap("assets/i4.ico")
     rooterr.mainloop()
 
-#Components
+##Components
 ttk.Label(frm, image=(im1), compound='image').grid(column=0, row=0)
 inval1 = tk.StringVar(frm)
 inval2 = tk.StringVar(frm)
@@ -194,7 +195,8 @@ resultlabel = ttk.Label(frm, justify=tk.CENTER, anchor=tk.CENTER, font=('Arial',
         borderwidth=2, relief="solid", width=maxcharlen, textvariable=resultlabelvar)
 resultlabel.grid(column=0, row=4, pady=4)
 ttk.Button(frm, text="Quit", style="QButton.TButton", command=root.destroy).grid(column=0, row=9, pady=10, padx=50)
-#Configurations
+
+##Configurations
 root.title("nBasen")
 root.wm_resizable(False, False)
 root.wm_iconbitmap("assets/i4.ico")
