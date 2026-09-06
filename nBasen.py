@@ -139,10 +139,14 @@ def errorcodesmenu ():
     ttk.Label(frmerr, image=(im1), compound='image').grid(column=0, row=0)
     frmerr2 = ttk.Frame(frmerr, width=25, height=50, borderwidth=2, relief="solid")
     frmerr2.grid(column=0, row=2, pady=10)
-    ttk.Label(frmerr, justify=tk.CENTER, anchor=tk.CENTER, text="Error Codes", font=('Arial', 24)).grid(column=0, row=1, pady=10)
-    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, text="Error Code 1: Value Not in Accepted List of Base Values", font=('Arial', 10)).grid(column=0, row=0, pady=5)
-    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, text="Error Code 2: Input Base or Output Base Not Defined", font=('Arial', 10)).grid(column=0, row=1, pady=5)
-    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, text="Error Code 3: Input Value Too Large for Output Base", font=('Arial', 10)).grid(column=0, row=2, pady=5)
+    ttk.Label(frmerr, justify=tk.CENTER, anchor=tk.CENTER, 
+    text="Error Codes", font=('Arial', 24)).grid(column=0, row=1, pady=10)
+    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, 
+    text="Error Code 1: Value Not in Accepted List of Base Values", font=('Arial', 10)).grid(column=0, row=0, pady=5)
+    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, 
+    text="Error Code 2: Input Base or Output Base Not Defined", font=('Arial', 10)).grid(column=0, row=1, pady=5)
+    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, 
+    text="Error Code 3: Input Value Too Large for Output Base", font=('Arial', 10)).grid(column=0, row=2, pady=5)
     ttk.Button(frmerr, text="Back", style="BButton.TButton", command=rooterr.destroy).grid(column=0, row=3, pady=10)
     rooterr.title("nBasen: Error Codes")
     rooterr.wm_resizable(False, False)
@@ -186,7 +190,8 @@ errcbtn = ttk.Button(frm, text="Error Codes", style="EButton.TButton",
         command=lambda: errorcodesmenu())
 errcbtn.grid(column=0, row=8, pady=4)
 resultlabelvar = tk.StringVar()
-resultlabel = ttk.Label(frm, justify=tk.CENTER, anchor=tk.CENTER, font=('Arial', 12), borderwidth=2, relief="solid", width=maxcharlen, textvariable=resultlabelvar)
+resultlabel = ttk.Label(frm, justify=tk.CENTER, anchor=tk.CENTER, font=('Arial', 12), 
+        borderwidth=2, relief="solid", width=maxcharlen, textvariable=resultlabelvar)
 resultlabel.grid(column=0, row=4, pady=4)
 ttk.Button(frm, text="Quit", style="QButton.TButton", command=root.destroy).grid(column=0, row=9, pady=10, padx=50)
 #Configurations
