@@ -26,7 +26,7 @@ def invertlist(listinput: list):
 
 def baseintoverflowdect (basen1, basen2, inputbase_n):
     currentb1val = convert_basentobaseten(int(basen1), inputbase_n)
-    maxb2 = convert_basentobaseten(int(basen2), listtostr(maxcharlen*conv_10pl_equiv([basen2-1], "to")))
+    maxb2 = convert_basentobaseten(int(basen2), listtostr(maxcharlen*conv_10pl_equiv([int(basen2)-1], "to")))
     return True if (currentb1val>maxb2) else False
 
 ##Conversion Functions
@@ -97,7 +97,7 @@ sbbtnstyle = ttk.Style().configure("SbButton.TButton", foreground="green", backg
 swbtnstyle = ttk.Style().configure("SwButton.TButton", foreground="blue", background="blue")
 ebtnstyle = ttk.Style().configure("EButton.TButton", foreground="ivory4", background="ivory4")
 
-##Functions
+##InputFunctions
 def parseinput (base1, base2, inputmain):
     if type(convert_basentobaseten(int(base1), inputmain)) != int:
         throwerr("Error Code 1")
@@ -106,6 +106,9 @@ def parseinput (base1, base2, inputmain):
     elif inputmain == "0" or inputmain == "":
         entry1var.set(inputmain)
         resultlabelvar.set(inputmain)
+        return
+    elif len(inputmain) > 16:
+        throwerr("Error Code 4")
         return
     elif baseintoverflowdect(base1, base2, inputmain):
         throwerr("Error Code 3")
@@ -128,7 +131,6 @@ def swapinputs (base1, base2, inputmain, outputmain):
     tempstorage = [tempsort(i) for i in [base1, base2, inputmain, outputmain]]
     menu1.set(lopts[tempstorage[1]])
     menu2.set(lopts[tempstorage[0]])
-    print(tempstorage)
     entry1var.set(tempstorage[3])
     resultlabelvar.set(tempstorage[2])
     parseinput(menu1.current(), menu2.current(), entry1var.get())
@@ -148,6 +150,8 @@ def errorcodesmenu ():
     text="Error Code 2: Input Base or Output Base Not Defined", font=('Arial', 10)).grid(column=0, row=1, pady=5)
     ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, 
     text="Error Code 3: Input Value Too Large for Output Base", font=('Arial', 10)).grid(column=0, row=2, pady=5)
+    ttk.Label(frmerr2, justify=tk.CENTER, anchor=tk.CENTER, 
+    text="Error Code 4: Input Value Exceeds Max Character Length", font=('Arial', 10)).grid(column=0, row=3, pady=5)
     ttk.Button(frmerr, text="Back", style="BButton.TButton", command=rooterr.destroy).grid(column=0, row=3, pady=10)
     rooterr.title("nBasen: Error Codes")
     rooterr.wm_resizable(False, False)
