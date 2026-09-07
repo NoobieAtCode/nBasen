@@ -8,7 +8,7 @@ listofbasevalues = ["0","1","2","3","4",
 listofbasevaluesint = [0,1,2,3,4,5,6,7,8,
                        9,"A","B","C",
                        "D","E","F"]
-maxcharlen: int = 16
+maxcharlen: int = 12
 
 #Parser Code
 
@@ -46,13 +46,13 @@ def conv_10pl_equiv(inputd, mode):
     rlist = []
     if mode == "to":
         for n in inputd:
-            rlist.append(listofbasevalues[n])
+            rlist.append(listofbasevalues[int(n)])
     elif mode == "from":
         for n in inputd:
             if (type(n) == int):
                 rlist.append(listofbasevaluesint.index(n))
             else: 
-                rlist.append(listofbasevalues.index(n))
+                rlist.append(listofbasevalues.index(str.upper(n)))
 
     return rlist
 
@@ -75,7 +75,7 @@ def convert_bases(basen1: int | str, basen2: int | str, inputbase_n):
         fscount += 1
         if (((prevmodp1)/basen2) == 0):
             pbconv_cond = True
-        if (fscount == 100):
+        if (fscount > maxcharlen):
             break
 
     return listtostr(conv_10pl_equiv(invertlist(returnlist), "to"))
@@ -101,13 +101,15 @@ ebtnstyle = ttk.Style().configure("EButton.TButton", foreground="ivory4", backgr
 def parseinput (base1, base2, inputmain):
     if type(convert_basentobaseten(int(base1), inputmain)) != int:
         throwerr("Error Code 1")
+        return
     elif base1 == 0 or base2 == 0:
         throwerr("Error Code 2")
+        return
     elif inputmain == "0" or inputmain == "":
         entry1var.set(inputmain)
         resultlabelvar.set(inputmain)
         return
-    elif len(inputmain) > 16:
+    elif len(inputmain) > maxcharlen:
         throwerr("Error Code 4")
         return
     elif baseintoverflowdect(base1, base2, inputmain):
@@ -118,8 +120,8 @@ def parseinput (base1, base2, inputmain):
         resultlabelvar.set(r)
 
 def clear_result():
-    resultlabelvar.set()
-    entry1var.set()
+    resultlabelvar.set("")
+    entry1var.set("")
     menu1.set("Select an option")
     menu2.set("Select an option")
 
@@ -180,7 +182,7 @@ menu1.grid(column=0, row=1, pady=5)
 menu2.grid(column=0, row=3)
 entry1var = tk.StringVar()
 entry1 = tk.Entry(frm, textvariable=entry1var, font=('Arial', 12), 
-        width=maxcharlen, justify=tk.CENTER, exportselection=0)
+        width=maxcharlen+4, justify=tk.CENTER, exportselection=0)
 entry1.grid(column=0, row=2, pady=4)
 submitbtn = ttk.Button(frm, text="Submit", style="SbButton.TButton",
         command=lambda: parseinput(menu1.current(), menu2.current(), entry1var.get()))
@@ -196,7 +198,7 @@ errcbtn = ttk.Button(frm, text="Error Codes", style="EButton.TButton",
 errcbtn.grid(column=0, row=8, pady=4)
 resultlabelvar = tk.StringVar()
 resultlabel = ttk.Label(frm, justify=tk.CENTER, anchor=tk.CENTER, font=('Arial', 12), 
-        borderwidth=2, relief="solid", width=maxcharlen, textvariable=resultlabelvar)
+        borderwidth=2, relief="solid", width=maxcharlen+4, textvariable=resultlabelvar)
 resultlabel.grid(column=0, row=4, pady=4)
 ttk.Button(frm, text="Quit", style="QButton.TButton", command=root.destroy).grid(column=0, row=9, pady=10, padx=50)
 
